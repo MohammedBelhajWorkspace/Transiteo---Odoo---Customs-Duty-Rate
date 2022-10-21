@@ -1,0 +1,73 @@
+<odoo>
+    <data>
+
+        <record id= "product_duties_template_only_form_view" model="ir.ui.view">
+		    <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+		    <field name="arch" type="xml">
+                <page name="CustomsCodeFinder" position="after">
+                    <page name="CustomsDutyRate" string="Customs Duty Rate">
+                        <group>
+                            <group colspan="4" col="4">
+                                <field name="from_country_name_duties"/>
+                            </group>
+                            <group colspan="4" col="4">
+                                <field name="to_country_name_duties"/>
+<!--                                <field name="to_country_show_name" readonly="1"/>-->
+                                <button string="Get It" name="search_duties" type="object" class="btn-primary"/>
+                            </group>
+<!--                            <group colspan="4" col="4">-->
+<!--                                <field name="taux_duties" readonly="1"/>-->
+<!--                            </group>-->
+                            <group colspan="4" col="4">
+                                <field name="cal_duties"/>
+                            </group>
+                            <group colspan="4" col="4">
+                                <field name="regime" readonly="1"/>
+                            </group>
+                        </group>
+
+                        <bottom>
+                            <div style="text-align:center">
+                                Please manually enter your country of departure, your country of destination, your duty rate and your regime
+                            </div>
+                            <div style="text-align:center">
+                                Please see the video explanation <a href="https://www.transiteo.com">Click here</a>
+                            </div>
+                        </bottom>
+
+                        <notebook>
+                            <page name="rates" string="Rates">
+                                <field name="tab_saver_ids" widget="one2Many_list">
+                                    <tree editable="bottom">
+                                        <field name="from_country"/>
+                                        <field name="to_country"/>
+                                        <field name="regime"/>
+                                        <field name="duty_rate"/>
+                                    </tree>
+                                </field>
+                            </page>
+					    </notebook>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+        <record id="product_duties_template_tree_view" model="ir.ui.view">
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='hs_europe']" position="after">
+                    <field name="taux_duties"/>
+                </xpath>
+                <xpath expr="//field[@name='taux_duties']" position="after">
+                    <field name="regime"/>
+                </xpath>
+<!--                <xpath expr="//field[@name='hs_europe']" position="after">-->
+<!--                    <field name="regime"/>-->
+<!--                </xpath>-->
+            </field>
+        </record>
+
+    </data>
+</odoo>
